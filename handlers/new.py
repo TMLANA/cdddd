@@ -3,8 +3,8 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserAlreadyParticipant
 from helpers.decorators import errors, authorized_users_only
-
-@Client.on_message(filters.group & filters.command(["userbotjoin"]))
+userbotjoin
+@Client.on_message(filters.group & filters.command(["دعوة المساعد"]))
 @authorized_users_only
 @errors
 async def addchannel(client, message):
@@ -13,7 +13,7 @@ async def addchannel(client, message):
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>First add me as admin in your group</b>",
+            "<b>أضفني أولاً كمسؤول في مجموعتك</b>",
         )
         return
 
@@ -27,27 +27,27 @@ async def addchannel(client, message):
         await USER.send_message(message.chat.id,"I joined here as you requested")
     except UserAlreadyParticipant:
         await message.reply_text(
-            "<b>Your user bot already in your chat</b>",
+            "<b>بوت المستخدم الخاص بك بالفعل في الدردشة الخاصة بك</b>",
         )
         pass
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"<b>🛑 Flood Wait Error 🛑 \n User Bot couldn't join your group due to heavy join requests for userbot! Make sure user is not banned in group."
-            "\n\nOr manually add your userbot your Group and try again</b>",
+            f"<b>🛑 خطاء انتظر 🛑 \n لم يتمكن User Bot من الانضمام إلى مجموعتك بسبب طلبات الانضمام الكثيفة لـ userbot!  تأكد من عدم حظر المستخدم في المجموعة."
+            "\n\nأو قم بإضافة userbot يدويًا إلى مجموعتك وحاول مرة أخرى</b>",
         )
         return
     await message.reply_text(
-            "<b>Your userbot joined your chat</b>",
+            "<b>انضم المستخدم الروبوت الخاص بك إلى الدردشة الخاصة بك</b>",
         )
     
-@USER.on_message(filters.group & filters.command(["userbotleave"]))
+@USER.on_message(filters.group & filters.command(["طرد المساعد"]))
 async def rem(USER, message):
     try:
         await USER.leave_chat(message.chat.id)
     except:  
         await message.reply_text(
-            f"<b>User couldn't leave your group! May be floodwaits."
-            "\n\nOr manually kick me from to your Group</b>",
+            f"<b>لا يمكن للمستخدم مغادرة مجموعتك!  قد يكون الفيضان."
+            "\n\nأو اطردني يدويًا من إلى مجموعتك</b>",
         )
         return
