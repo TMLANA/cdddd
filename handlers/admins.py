@@ -25,7 +25,7 @@ async def pause(_, message: Message):
         await message.reply_text(f"**{BN} :-** تم ايقاف الاغنيه ✅")
 
 
-@Client.on_message(command("resume") & other_filters)
+@Client.on_message(command("استئناف") & other_filters)
 @errors
 @authorized_users_only
 async def resume(_, message: Message):
